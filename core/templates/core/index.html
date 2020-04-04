@@ -6,7 +6,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-		    <div id="head1" class="col-sm-5">
+		    <div id="head1" class="col-lg-5">
 		    	<span class="donate_msg">Experience the wonder. <br/>
 		    	Donate Blood. <br/>
 		    	Save Life.<br />
@@ -14,7 +14,7 @@
 		    	</span>
 
 		    </div>
-		    <div id="head2" class="col-sm">
+		    <div id="head2" class="col-lg-7">
 		      
 		    </div>
 		     <img class="wave"  src="{% static 'core/images/wave.png' %}">
@@ -27,7 +27,7 @@
  		<div class="container-fluid bg-white ">
 	<div id="search" class="row align-items-center justify-content-center">
 
-                        <div class="col-md-6 pt-3">
+                        <div class="col-lg-6 pt-3">
                         	<h2 class="search_h">Search For Blood</h2> 	
                         <p>	
                         <form method="POST">
@@ -53,14 +53,14 @@
 
             	        </div>
 
-            	        <div class="col-md-6 pt-3">
+            	        <div class="col-lg-6 pt-3">
                         	<h2 class="search_h">Search For Donors</h2> 	
                         <p>	
                             <form method="POST">
                             {% csrf_token %}
                             <div class="row">
-                             <div class="col-md pt-3">
-                          <div class="search-form form-group" style=" width: 75%; margin-left: 45%">
+                             <div class="col-lg pt-3">
+                          <div class="search_donors_index search-form form-group">
                               <select name="bloodgroup" id="inputState" class="form-control">
                                 <option selected>Select Blood Type: </option>
                                 <option>A+</option>
@@ -76,7 +76,7 @@
                                
                             </div>
                         </div>
-                        <div class="col-md pt-3">
+                        <div class="col-lg pt-3">
                           <div class="search-form form-group" style=" width: 75%; margin-right: 35%">
                               <select id="inputState" name="location" class="form-control">
                                 <option selected> &nbsp Select location: </option>
@@ -108,12 +108,12 @@
 
  	<div class="container-fluid">
  		<div class="row" id="info">
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<img id="reqimg" src="{% static 'core/images/requirements.jpeg' %}">
  				
  			</div>
 
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<h4 class="info_h">Who can Donate?</h4><br>
  				<p>Most people can give blood. You can give blood if you:
  					<ul>
@@ -134,7 +134,7 @@
  		<h2 class="ser_h">Our Services</h2>
  		<div class="row" id="services">
 
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<a href="{% url 'searchblood' %}">
                     <img class="ser_img" src="{% static 'core/images/ser1.png'%}">
                 </a>
@@ -142,7 +142,7 @@
  				<p class="ser_info">Check for the availibility of the blood quickly and easily.</p>
  				
  			</div>
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<a href=" {% url 'searchdonor' %}">
                     <img class="ser_img" src="{% static 'core/images/ser2.png'%}">
                 </a>
@@ -150,7 +150,7 @@
  				<p class="ser_info">Find the donors around who are eligible and request for blood.</p>
  				
  			</div>
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<a href="{% url 'regdonor' %}">
                     <img class="ser_img" src="{% static 'core/images/ser3.png'%}">
                 </a>
@@ -163,7 +163,7 @@
 
  	<div class="container-fluid" >
  		<div class="row" id="involve">
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<h3 class="inv_h">Get Involved</h3><br>
  				<p class="inv_info">We invite you to join the great cause. Become a volunteer and help the people in need.One pint of blood can save up to three lives. </p><br>
  					<b>"Help save Life. Give the gift of Blood" </b> <br>
@@ -173,7 +173,7 @@
 
  				
  			</div>
- 			<div class="col-sm">
+ 			<div class="col-md">
  				<img id="inv_img" src="{% static 'core/images/bdonate3.jpg' %}">
  				
  			</div>
