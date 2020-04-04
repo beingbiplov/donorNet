@@ -1,44 +1,114 @@
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Performance</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
-<body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<navbar>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
-		<nav class="navbar navbar-expand-lg ml-auto navbar-light">
-              <a href="/" class="navbar-brand ml-5">DonorNet</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse" id="navbar2">
-                    
-                    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-                  <!-- //navigation -->
-                </div>
-              </nav>
+    <link rel="stylesheet" type="text/css" href="{% static 'core/style.css' %}">
 
 
-	</navbar>
 
-	{% block content %}
+    <title>Save Life</title>
+  </head>
+  <body>
 
-	{% endblock %}
+    
+<nav class="navbar navbar-expand-sm navbar-light">
+  <a href="/" class="navbar-brand"><img src="{% static 'core/images/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    <em style="color: purple; font-size: 30px;"> DonorNet </em></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar2">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar2">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">Home</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'regdonor' %}"><b>Donate</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'searchblood' %}">Search Blood</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'searchdonor' %}">Search Donors</a>
+            </li>
+            
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'bloodregister' %}">Register Blood</a>
+            </li>
+            <li>
+               <a class="nav-link" href="{% url 'pendingdonors' %}">Verify Donors</a>
+            </li>
+          {% else %}
+            <li><a href="admin/login/?next=/"><button class="btn-primary" style="cursor:pointer;"> Log In</button> </a></li>
+          {% endif %}
+
+    </ul>
+    </div>
+</nav>
+
+     
+  
 
 
-	
+
+        {% block content %}
+        {% endblock %}
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <footer id="sticky-footer">
+    <div class="container ">
+      <div class="row">
+        <div class="col-sm">
+          <img class="footer_logo" src="{% static 'core/images/logo.png' %}"> 
+           <em style="color: white; font-size: 30px;"> Blood Bank </em> <br><br>
+           <img class=" social_icons" src="{% static 'core/images/fb.png' %}">
+           <img class=" social_icons" src="{% static 'core/images/insta.png' %}">
+           <img class=" social_icons" src="{% static 'core/images/twtr.png' %}"> <br><br>
+          <em style="font-weight: lighter; font-size: 20px; color: white; margin-left: 5%">01-551459 <br>  01-551460</em>
+        </div>
+        <div class="col-sm">
+          <h3 class="footer_info">Our Organization</h3>
+          <h5 class="footer_info"> History</h4>
+          <h5 class="footer_info"> Location</h4>
+          <h5 class="footer_info"> Working Hours</h4>
+        </div>
+        <div class="col-sm">
+           <h3 class="footer_info">Resources</h3>
+          <h5 class="footer_info"> FAQa</h4>
+          <h5 class="footer_info"> Donor form</h4>
+          <h5 class="footer_info"> Questionnaire</h4>
+          <h5 class="footer_info"> Contact US</h4>
+        </div>
+      </div>
 
-</body>
+      <div class="copyright">
+
+        © 2019 Blood Bank. All Rights Reserved. 
+        
+      </div>
+
+    </div>
+  </footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
 </html>

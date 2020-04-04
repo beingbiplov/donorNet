@@ -1,1 +1,185 @@
-<h2>Hello There</h2>
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+	<div class="container-fluid">
+		<div class="row">
+		    <div id="head1" class="col-sm-5">
+		    	<span class="donate_msg">Experience the wonder. <br/>
+		    	Donate Blood. <br/>
+		    	Save Life.<br />
+		    	<a href="{% url 'regdonor' %}"><button id="donate_btn" type='button' class="btn-primary" > Donate</button> </a>
+		    	</span>
+
+		    </div>
+		    <div id="head2" class="col-sm">
+		      
+		    </div>
+		     <img class="wave"  src="{% static 'core/images/wave.png' %}">
+
+ 		 </div>
+
+ 	</div>
+
+
+ 		<div class="container-fluid bg-white ">
+	<div id="search" class="row align-items-center justify-content-center">
+
+                        <div class="col-md-6 pt-3">
+                        	<h2 class="search_h">Search For Blood</h2> 	
+                        <p>	
+                        <form method="POST">
+                            {% csrf_token %}
+                          <div class="search-form form-group ">
+                              <select name="bloodgroup" id="inputState" class="form-control">
+                                <option selected>Select Blood Type: </option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB-</option>
+                                <option>AB+</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                              </select>
+                               
+                            </div>
+                            
+            	          <button type="submut" class="searchbtn btn btn-primary btn-block">Submit</button>
+                        </form>
+            	      </p>
+
+            	        </div>
+
+            	        <div class="col-md-6 pt-3">
+                        	<h2 class="search_h">Search For Donors</h2> 	
+                        <p>	
+                            <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                             <div class="col-md pt-3">
+                          <div class="search-form form-group" style=" width: 75%; margin-left: 45%">
+                              <select name="bloodgroup" id="inputState" class="form-control">
+                                <option selected>Select Blood Type: </option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB-</option>
+                                <option>AB+</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                              </select>
+
+                               
+                            </div>
+                        </div>
+                        <div class="col-md pt-3">
+                          <div class="search-form form-group" style=" width: 75%; margin-right: 35%">
+                              <select id="inputState" name="location" class="form-control">
+                                <option selected> &nbsp Select location: </option>
+                                <option>Kathmandu</option>
+                                <option>Bhaktapur</option>
+                                <option>Lalitpur</option>
+                                <option>Birtamod</option>
+                                <option>Pokhara</option>
+                              </select>
+
+                               
+                            </div>
+                        </div>
+                        </div>
+
+            	          <button type="submit" class="searchbtn btn btn-primary btn-block" style="width: 70%">Search</button>
+                          </form>
+            	      </p>
+
+            	        </div>
+            	       
+            	           
+            	        
+                	</div>
+</div>
+
+
+
+
+ 	<div class="container-fluid">
+ 		<div class="row" id="info">
+ 			<div class="col-sm">
+ 				<img id="reqimg" src="{% static 'core/images/requirements.jpeg' %}">
+ 				
+ 			</div>
+
+ 			<div class="col-sm">
+ 				<h4 class="info_h">Who can Donate?</h4><br>
+ 				<p>Most people can give blood. You can give blood if you:
+ 					<ul>
+ 						<li>are fit and healthy</li>
+ 						<li>weigh between 50kg and 160kg</li>
+ 						<li>are aged between 17 and 66 (or 70 if you have given blood before)</li>
+ 						<li>are over 70 and have given blood in the last two years</li>
+ 					</ul>
+ 				</p>
+ 				<h4 class="info_h">How often can I give blood?</h4><br>
+ 				<p>Men can give blood every 12 weeks and women can give blood every 16 weeks.</p>
+ 				
+ 			</div>
+ 		</div>
+ 	</div>
+
+ 	<div class="container-fluid">
+ 		<h2 class="ser_h">Our Services</h2>
+ 		<div class="row" id="services">
+
+ 			<div class="col-sm">
+ 				<a href="{% url 'searchblood' %}">
+                    <img class="ser_img" src="{% static 'core/images/ser1.png'%}">
+                </a>
+ 				<h5 class="ser_in">Search</h5>
+ 				<p class="ser_info">Check for the availibility of the blood quickly and easily.</p>
+ 				
+ 			</div>
+ 			<div class="col-sm">
+ 				<a href=" {% url 'searchdonor' %}">
+                    <img class="ser_img" src="{% static 'core/images/ser2.png'%}">
+                </a>
+ 				<h5 class="ser_in">Find Donors</h5>
+ 				<p class="ser_info">Find the donors around who are eligible and request for blood.</p>
+ 				
+ 			</div>
+ 			<div class="col-sm">
+ 				<a href="{% url 'regdonor' %}">
+                    <img class="ser_img" src="{% static 'core/images/ser3.png'%}">
+                </a>
+ 				<h5 class="ser_in">Become Volunteer</h5>
+ 				<p class="ser_info">Become a Volunteer. Give Blood Save Life.</p>
+ 				
+ 			</div>
+ 		</div>
+ 	</div>
+
+ 	<div class="container-fluid" >
+ 		<div class="row" id="involve">
+ 			<div class="col-sm">
+ 				<h3 class="inv_h">Get Involved</h3><br>
+ 				<p class="inv_info">We invite you to join the great cause. Become a volunteer and help the people in need.One pint of blood can save up to three lives. </p><br>
+ 					<b>"Help save Life. Give the gift of Blood" </b> <br>
+
+ 				<a href="{% url 'regdonor' %}"><button class="btn-primary" id="bedonor_btn"> Be a Volunteer</button> </a>
+		    	</span>
+
+ 				
+ 			</div>
+ 			<div class="col-sm">
+ 				<img id="inv_img" src="{% static 'core/images/bdonate3.jpg' %}">
+ 				
+ 			</div>
+ 		</div>
+ 	</div>
+
+	
+
+{% endblock %}

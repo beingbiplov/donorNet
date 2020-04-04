@@ -1,0 +1,261 @@
+ .navbar {
+  min-height: 60px;
+}
+
+.navbar-brand {
+  padding: 5px 15px;
+  height: 80px;
+  
+  margin-top: 19px;
+}
+
+.navbar-toggle {
+  /* (80px - button height 34px) / 2 = 23px */
+  margin-top: 23px;
+  padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    /* (80px - line-height of 27px) / 2 = 26.5px */
+    padding-top: 26.5px;
+    padding-bottom: 26.5px;
+    line-height: 27px;
+  }
+}
+
+#navbar2{
+  padding-left: 35px;
+}
+#navbar2 ul li {
+  padding-left: 35px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: purple;
+  border-radius: 35px; 
+  border: 2px solid purple;
+  margin-right: 35px;
+ 
+}
+
+.donate_msg{
+  color: white;
+  font-size: 35px;
+  font-weight: 100;
+  font-family: Helvetica, Arial, sans-serif;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  height: 30%;
+  width: 50%;
+  margin: -15% 0 0 -25%;
+
+
+}
+#donate_btn{
+  background: #e65300;
+  margin-top: 35px;
+  border: 2px solid #e65300;
+  cursor:pointer;
+}
+
+#head1{
+   position: relative;
+
+
+  background: url('images/bloodbg.jpg')no-repeat ;
+  background-repeat: no-repeat;
+  width: cover;
+  height: 520px;
+  display: block;
+ 
+
+}
+#head2{
+  background: url('images/bdonate2.jpg') ;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wave{
+  transform: rotate(0deg);
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+}
+#info{
+  background: #f0f0f0;
+}
+
+#reqimg{
+  height: 75%;
+  width: 75%;
+
+  margin: 10% 0 0 25%;
+}
+
+.info_h{
+  color: purple;
+  margin: 10% 0 0 0;
+  font-weight: bolder;
+}
+
+.ser_h{
+  color: #f58220;
+  text-align: center;
+  font-weight: bolder;
+  margin: 3% 0 0 0;
+}
+
+.ser_img{
+  margin: 7% 0 0 40%;
+}
+.ser_in{
+  text-align: center;
+  margin: 5% 0 0 0;
+}
+.ser_info{
+  text-align: center;
+  margin: 3% 5% 0 5%;
+}
+
+#involve{
+  background: #f0f0f0;
+  margin: 1% 0 0 0;
+  
+
+}
+
+.inv_h{
+  color: purple;
+  margin: 3% 0 0 0 ;
+}
+
+.inv_info{
+  
+}
+
+#inv_img{
+  height: 350px;
+  border-radius: 50% ;
+  margin: 1% 0 1% 0;
+
+}
+
+#bedonor_btn{
+  background: #e65300;
+  margin-top: 35px;
+  border: 2px solid darkorange;
+  font-weight: bolder;
+  font-size: 25px;
+
+}
+
+#sticky-footer {
+  background: #722282;
+
+}
+
+.footer_logo{
+  width: 30px;
+  height: 30px;
+
+}
+
+.footer_info{
+  color: white;
+
+}
+
+.social_icons{
+  width: 35px;
+  padding-left: 10px;
+  margin-left: 4%;
+}
+
+.copyright{
+  color: white;
+  text-align: center;
+  margin: 3% 0 0 0;
+}
+
+#search{
+  margin: 3% 5% 3% 0;
+
+}
+
+.search-form{
+  width: 55%;
+  margin: 0 0 0 23%;
+}
+
+.searchbtn{
+  background: #e65300;
+  width: 55%;
+  border: 1px solid #e65300;
+  margin: 2% 0 0 23%;
+}
+
+.search_h{
+  text-align: center;
+  font-weight: bolder;
+  margin: 3% 0 0 0;
+
+}
+
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+.btn-facebook {
+    background-color: #405D9D;
+    color: #fff;
+}
+.btn-twitter {
+    background-color: #42AEEC;
+    color: #fff;
+}
+
+.card {
+  padding: 40px;
+  background: #fff;
+  max-width: 360px;
+  border-radius: 20px;
+  margin: 60px auto;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #294;
+}
+
+.shadow1 { 
+  box-shadow: 0 5px 10px rgba(154,160,185,.05), 0 15px 40px rgba(166,173,201,.2);
+}
+
+.shadow2 { 
+  box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5);
+}
+
