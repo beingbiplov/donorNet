@@ -30,16 +30,16 @@
     <div class="navbar-collapse collapse" id="navbar2">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">Home</span></a>
+                <a class="nav-link" href="{% url 'core:index' %}">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'regdonor' %}"><p>Donate</p></a>
+                <a class="nav-link" href="{% url 'register' %}"><p>Donate</p></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'searchblood' %}">Search Blood</a>
+                <a class="nav-link" href="{% url 'register' %}">Search Blood</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'searchdonor' %}">Search Donors</a>
+                <a class="nav-link" href="{% url 'register' %}">Search Donors</a>
             </li>
             
         </ul>
@@ -47,10 +47,10 @@
         <ul class="nav navbar-nav ml-auto">
           {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'bloodregister' %}">Register Blood</a>
+                <a class="nav-link" href="{% url 'register' %}">Register Blood</a>
             </li>
             <li>
-               <a class="nav-link" href="{% url 'pendingdonors' %}">Verify Donors</a>
+               <a class="nav-link" href="{% url 'register' %}">Verify Donors</a>
             </li>
           {% else %}
             <li><a href="admin/login/?next=/"><button class="btn-primary" style="cursor:pointer;"> Log In</button> </a></li>

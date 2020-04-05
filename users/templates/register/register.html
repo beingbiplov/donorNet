@@ -2,6 +2,18 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+	
+	<div style="margin-left: 20%; margin-right: 20%; text-align: center">
+		{% if messages %}
+          {% for message in messages %}
+
+          <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+          </div>
+
+          {% endfor %}
+          {% endif %}
+	</div>
 
 	<div class="container" style="margin-left: 15%; width: 50%; margin-top: 50px; padding: 25px;">
 		<form method="POST" class="form-group">

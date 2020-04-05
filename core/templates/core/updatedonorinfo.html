@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+		
+		<div class="container">
+
+			
+			
+
+			<div class="card bg-light" style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					<h4 class="card-title mt-3 text-center">Become a Donor</h4>
+					<p class="text-center">Register and be a volunteer.</p>
+					<p>
+						<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Register via Twitter</a>
+						<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Register via facebook</a>
+					</p>
+					<p class="divider-text">
+				        <span class="bg-light">OR</span>
+				    </p>
+
+				    <form method="post">
+						{% csrf_token %}
+						{{ form|crispy }}
+						<div class="form-group">
+				        <button type="submit" class="btn btn-primary btn-block" value="Save"> Submit  </button>
+				    </div> 
+					</form>
+
+				</article>
+				</div> <!-- card.// -->
+
+				</div> 
+				<!--container end.//-->
+
+
+
+
+
+
+
+
+
+{% endblock %}

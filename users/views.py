@@ -1,13 +1,25 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
+from .models import User
+from django.contrib import messages
 
-def register(response):
-	if response.method == 'POST':
-		form = RegisterForm(response.POST)
-		if form.is_valid():
-			form.save()
+def register(request):
+	if request.method == 'POST':
+		form = RegisterForm(request.POST)
+		r_email = request.POST['email']
 
-		return redirect('/')
+		email_check = User.objects.filter(email=r_email)
+		print(email_check)
+		if not email_check:
+
+			if form.is_valid():
+				form.save()
+			messages.info(request, f'Please log in to continue!')
+			return redirect('core:add-donor-info')
+		else:
+			messages.info(request, f'The email address already has an account. Please log in or use a different email address')
+			return redirect('register')
+
 	else:
 		form = RegisterForm()
-	return render(response, 'register/register.html', {'form':form})
+	return render(request, 'register/register.html', {'form':form})
