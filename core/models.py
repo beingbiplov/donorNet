@@ -1,6 +1,8 @@
 from django.db import models
-# from django.utils import timezone
+from django.utils import timezone
 from datetime import date
+from users.models import User
+from django.core.validators import MaxValueValidator , MinValueValidator
 
 # Create your models here.
 blood_choices = [
@@ -21,20 +23,22 @@ gender_choices = [
 ]
 
 class Donor(models.Model):
-    name= models.CharField( max_length=150)
-    age = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name= models.CharField( max_length=150)
+    age = models.IntegerField(validators=[MinValueValidator(17), MaxValueValidator(70)])
     gender = models.CharField(max_length=50, choices=gender_choices)
-    number = models.IntegerField()
-    location = models.CharField( max_length=50)
-    blood_group = models.CharField(max_length=10, choices=blood_choices)
-    email = models.EmailField(max_length=254, blank=True, null= True)
-    last_donated = models.DateField(default=date.today)
-    
+    phone_number = models.PositiveIntegerField(null=False, blank=False, unique=True)
+    location1 = models.CharField( max_length=50)
+    location2 = models.CharField( max_length=50, null=True, blank=True)
+    blood_group = models.CharField(max_length=10, choices=blood_choices)    
+    last_donated = models.DateField()
+    date_joined = models.DateTimeField(default=timezone.now)
+
     is_18 = models.BooleanField()
 
     
 
 
     def __str__(self):
-        return self.blood_group
+        return f'{self.name} : {self.blood_group}'
     
