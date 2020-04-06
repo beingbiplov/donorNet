@@ -5,10 +5,12 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import SearchDonorForm
 
 
 def index(request):
-	return render(request, 'core/index.html')
+	form = SearchDonorForm
+	return render(request, 'core/index.html', {'form': form})
 
 
 class addDonnorInfo(LoginRequiredMixin, UserPassesTestMixin, CreateView):

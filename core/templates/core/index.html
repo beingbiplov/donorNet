@@ -1,5 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 {% block content %}
@@ -28,71 +29,25 @@
 	<div id="search" class="row align-items-center justify-content-center">
 
                         <div class="col-lg-6 pt-3">
-                        	<h2 class="search_h">Search For Blood</h2> 	
-                        <p>	
-                        <form method="POST">
-                            {% csrf_token %}
-                          <div class="search-form form-group ">
-                              <select name="bloodgroup" id="inputState" class="form-control">
-                                <option selected>Select Blood Type: </option>
-                                <option>A+</option>
-                                <option>A-</option>
-                                <option>B+</option>
-                                <option>B-</option>
-                                <option>AB-</option>
-                                <option>AB+</option>
-                                <option>O+</option>
-                                <option>O-</option>
-                              </select>
-                               
-                            </div>
-                            
-            	          <button type="submut" class="searchbtn btn btn-primary btn-block">Submit</button>
-                        </form>
+                        	<h2 class="search_h mb-3">Search Donors</h2> 	
+                        <p class="search_donor_info">	
+                        You can search for donors near you and request for donation. Select the country , bloodgroup and enter the city name.  
+            	          
             	      </p>
 
             	        </div>
 
             	        <div class="col-lg-6 pt-3">
-                        	<h2 class="search_h">Search For Donors</h2> 	
-                        <p>	
+                        	
                             <form method="POST">
                             {% csrf_token %}
-                            <div class="row">
-                             <div class="col-lg pt-3">
-                          <div class="search_donors_index search-form form-group">
-                              <select name="bloodgroup" id="inputState" class="form-control">
-                                <option selected>Select Blood Type: </option>
-                                <option>A+</option>
-                                <option>A-</option>
-                                <option>B+</option>
-                                <option>B-</option>
-                                <option>AB-</option>
-                                <option>AB+</option>
-                                <option>O+</option>
-                                <option>O-</option>
-                              </select>
-
-                               
-                            </div>
-                        </div>
-                        <div class="col-lg pt-3">
-                          <div class="search-form form-group" style=" width: 75%; margin-right: 35%">
-                              <select id="inputState" name="location" class="form-control">
-                                <option selected> &nbsp Select location: </option>
-                                <option>Kathmandu</option>
-                                <option>Bhaktapur</option>
-                                <option>Lalitpur</option>
-                                <option>Birtamod</option>
-                                <option>Pokhara</option>
-                              </select>
-
-                               
-                            </div>
-                        </div>
-                        </div>
-
-            	          <button type="submit" class="searchbtn btn btn-primary btn-block" style="width: 70%">Search</button>
+                            <p class="donor_search_form_fields">
+                             {{ form.country }}
+                             
+                             {{ form.blood_group}}
+                             {{ form.location }}
+                             </p>
+            	          <button type="submit" class="searchbtn btn btn-primary btn-block" style="width: 60%">Search</button>
                           </form>
             	      </p>
 

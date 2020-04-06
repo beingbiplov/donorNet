@@ -131,6 +131,7 @@
 
 }
 
+
 .inv_h{
   color: purple;
   margin: 3% 0 0 0 ;
@@ -286,4 +287,19 @@
   .ser_img{
     margin-left: 35%;
   }
+}
+
+.search_donor_info{
+  padding: 25px;
+  
+}
+
+input, select{
+  width: 250px;
+  display: block;
+  margin-bottom: 7px;
+} 
+
+.donor_search_form_fields{
+  margin-left: 30%;
 }
