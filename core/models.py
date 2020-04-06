@@ -37,6 +37,7 @@ class Donor(models.Model):
     last_donated = models.DateField(null=True, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
+    can_donate = models.BooleanField(default=True)
     
     def __str__(self):
         return f'{self.full_name} : {self.blood_group}'
