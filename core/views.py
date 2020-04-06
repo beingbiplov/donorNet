@@ -16,7 +16,7 @@ class addDonnorInfo(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 	
 
 	model = Donor
-	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'location1', 'location2','last_donated','is_18']
+	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'country', 'location1', 'location2','last_donated','is_18']
 	template_name = 'core/createdonorprofile.html'
 	success_url = reverse_lazy('core:index')
 

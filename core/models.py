@@ -4,6 +4,7 @@ from datetime import date
 from users.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
 from django.core.validators import RegexValidator
+from django_countries.fields import CountryField
 
 # Create your models here.
 blood_choices = [
@@ -31,6 +32,7 @@ class Donor(models.Model):
     phone_number = models.CharField(max_length=15, validators=[RegexValidator(r'^\d{1,10}$')])
     location1 = models.CharField( max_length=50)
     location2 = models.CharField( max_length=50, null=True, blank=True)
+    country = CountryField(blank_label='(select country)')
     blood_group = models.CharField(max_length=10, choices=blood_choices)    
     last_donated = models.DateField(null=True, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
