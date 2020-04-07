@@ -39,6 +39,7 @@
   border-radius: 35px; 
   border: 2px solid purple;
   margin-right: 35px;
+  cursor: pointer;
  
 }
 
@@ -302,4 +303,8 @@ input, select{
 
 .donor_search_form_fields{
   margin-left: 30%;
+}
+
+.search_card{
+  background-color: #79cbd9;;
 }

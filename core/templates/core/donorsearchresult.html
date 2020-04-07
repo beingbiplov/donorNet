@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+		
+		<div class="container">
+
+			
+			
+
+			<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					<h4 class="card-title mt-2 text-center">Search Results</h4>
+
+					There are {{ bloodgroup_donor_records_total }} donors in {{ r_location }}, {{ r_country }} that matches your query. <br>
+					<small>Query:(country: {{ r_country }}, location: {{ r_location }}, Blood group: {{ r_blood_group }}) </small>
+					<br><br>
+
+					{% if bloodgroup_donor_records_total >= 1 %}
+
+						<button type="btn" class="btn-primary">Request Blood Donation</button>
+					{%  else %}
+						<p>You can search for donors in nearby city or use a general location.</p> 
+						There are {{ country_donor_records_total }} donors registered in {{ r_country }}. <br><br>
+						<button type="btn" class="btn-primary">Search Donors</button>
+					{% endif %}
+
+					<br> <br><br>
+					{% if not user.is_authenticated %}
+						<a href="{% url 'register' %}">Donate Blood. save Life</a>
+					
+					{% endif %}
+					
+				</article>
+				</div> <!-- card.// -->
+
+				</div> 
+				<!--container end.//-->
+
+
+
+
+
+
+
+
+
+{% endblock %}

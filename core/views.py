@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, UpdateView
+from django.db.models import Q
 from .models import Donor
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -9,7 +10,32 @@ from .forms import SearchDonorForm
 
 
 def index(request):
-	form = SearchDonorForm
+	if request.method == 'POST':
+		r_country = request.POST['country']
+		r_blood_group = request.POST['blood_group']
+		r_location = request.POST['location']
+
+
+		country_donor_records = Donor.objects.filter(country=r_country)
+		country_donor_records_total = country_donor_records.count()
+		location_donor_records = country_donor_records.filter(Q(location1=r_location) | Q(location2=r_location))
+		location_donor_records_total = location_donor_records.count()
+		bloodgroup_donor_records = location_donor_records.filter(blood_group=r_blood_group)
+		bloodgroup_donor_records_total = bloodgroup_donor_records.count()
+
+		context = {
+			'r_country' : r_country,
+			'r_location' : r_location,
+			'r_blood_group' : r_blood_group,
+			'country_donor_records_total' : country_donor_records_total,
+			'location_donor_records_total' : location_donor_records_total,
+			'bloodgroup_donor_records_total' : bloodgroup_donor_records_total
+		}
+
+		return render(request, 'core/donorsearchresult.html', context)
+
+	else:
+		form = SearchDonorForm
 	return render(request, 'core/index.html', {'form': form})
 
 
