@@ -3,6 +3,14 @@
 
 {% block content %}
 
+	<div style="margin-left: 20%; margin-right: 20%; text-align: center">
+		{% if messages %}
+          {% for message in messages %}
+
+     		 <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+	</div>
+
 	<div class="container" style="margin-left: 15%; width: 50%; margin-top: 50px; padding: 75px;">
 		<form method="post" class="from-group">
 			{% csrf_token %}

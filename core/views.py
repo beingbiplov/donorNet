@@ -201,3 +201,13 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 		form.instance.user = self.request.user
 		return super().form_valid(form)
 
+
+def HandleBloodRequest(request):
+	user = request.user
+
+	user_blood_request = BloodRequest.objects.filter(user=user)
+	context={
+		'user_blood_request' : user_blood_request,
+	}
+	print(user_blood_request)
+	return render(request, 'core/userbloodrequest.html', context)

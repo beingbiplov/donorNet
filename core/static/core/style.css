@@ -308,3 +308,7 @@ input, select{
 .search_card{
   background-color: #79cbd9;;
 }
+
+.blood_group_card{
+  color: red;
+}

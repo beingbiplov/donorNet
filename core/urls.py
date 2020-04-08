@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import index,addDonnorInfo, updateDonnorInfo
+from .views import (index,
+        addDonnorInfo, 
+        updateDonnorInfo, 
+        addPatientInfo, 
+        updatePatientInfo, 
+        RequestBlood,
+        HandleBloodRequest,
+
+    )
 
 app_name = 'core'
 
@@ -9,7 +17,10 @@ urlpatterns = [
     path('donr-register', index, name='regdonor'),
     path('add-donor-info', addDonnorInfo.as_view(), name='add-donor-info'),
     path('update-donor-info/<int:pk>', updateDonnorInfo.as_view(), name='update-donor-info'),
-
+    path('add-patient-info', addPatientInfo.as_view(), name='add-patient-info'),
+    path('update-patient-info/<int:pk>', updatePatientInfo.as_view(), name='update-patient-info'),
+    path('request-blood-donation', RequestBlood.as_view(), name='request-blood-donation'),
+    path('handle',HandleBloodRequest, name='handle'),
 
     path('searchresult', index, name='searchresult'),
     path('donorlist', index, name='donorlist'),
