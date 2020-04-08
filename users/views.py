@@ -9,13 +9,16 @@ def register(request):
 		r_email = request.POST['email']
 
 		email_check = User.objects.filter(email=r_email)
-		print(email_check)
+		
 		if not email_check:
 
 			if form.is_valid():
 				form.save()
 			messages.info(request, f'Please log in to continue!')
-			return redirect('core:add-donor-info')
+			if 'register_donor' in request.POST:
+				return redirect('core:add-donor-info')
+			else:
+				return redirect('core:add-patient-info')
 		else:
 			messages.info(request, f'The email address already has an account. Please log in or use a different email address')
 			return redirect('register')
