@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+		
+		<div class="container">
+			
+			<div class="row">
+
+				
+				<div class="col-lg col-md">
+			
+
+				<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					
+
+					<h2 class="blood_group_card"> Donation Request </h2>
+					<br>
+
+					There are {{ matching_records_total }} donors in {{ req_location }}, {{ req_country }} that matches your query. <br>
+					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
+					<br><br>
+
+					{% if matching_records_total < 15 %}
+						<h4>We have sent sms request to {{ matching_records_total }} donors that matches your query. Please wait for their response.</h4>
+					{% elif matching_records_total >= 15 %}
+						<h4>We have sent sms request to 15 donors that matches your query. Please wait for their response.</h4>
+					{% endif %}
+
+						
+						
+					
+					</p>
+				</article>
+				</div> <!-- card.// -->
+
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+				<!--container end.//-->
+
+
+
+
+
+
+
+
+
+{% endblock %}

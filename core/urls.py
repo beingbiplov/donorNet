@@ -6,6 +6,7 @@ from .views import (index,
         updatePatientInfo, 
         RequestBlood,
         HandleBloodRequest,
+        sendDonorRequest,
 
     )
 
@@ -20,7 +21,8 @@ urlpatterns = [
     path('add-patient-info', addPatientInfo.as_view(), name='add-patient-info'),
     path('update-patient-info/<int:pk>', updatePatientInfo.as_view(), name='update-patient-info'),
     path('request-blood-donation', RequestBlood.as_view(), name='request-blood-donation'),
-    path('handle',HandleBloodRequest, name='handle'),
+    path('my-requests',HandleBloodRequest, name='my-requests'),
+    path('send-request/<int:pk>', sendDonorRequest, name='send-request'),
 
     path('searchresult', index, name='searchresult'),
     path('donorlist', index, name='donorlist'),

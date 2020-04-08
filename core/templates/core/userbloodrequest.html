@@ -33,7 +33,7 @@
 						Required On : {{ request.required_on }}
 						<br><br>
 
-						<button type="btn" class="btn-primary">Request Blood Donation</button>
+						<a href="{% url 'core:send-request' request.pk %}" type="btn" class="btn-primary">Request Blood Donation</a>
 						
 					
 					</p>

@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, UpdateView
 from django.db.models import Q
-from .models import Donor, Patient, BloodRequest
+from .models import Donor, Patient, BloodRequest, DonorRequest
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import SearchDonorForm
-from .send_sms import welcome_message
+from .send_sms import welcome_message, send_donation_request
 
 def index(request):
 	if request.method == 'POST':
@@ -209,5 +209,46 @@ def HandleBloodRequest(request):
 	context={
 		'user_blood_request' : user_blood_request,
 	}
-	print(user_blood_request)
+	
 	return render(request, 'core/userbloodrequest.html', context)
+
+
+def sendDonorRequest(request, pk):
+	user = request.user
+	request_data = BloodRequest.objects.get(pk=pk)
+	
+
+	req_bloodgroup = request_data.blood_group
+	req_country = request_data.country
+	req_location1 = request_data.location1
+	req_location2 = request_data.location2
+	req_required_on = request_data.required_on
+
+	country_donor_records = Donor.objects.filter(country=req_country)
+	country_donor_records_total = country_donor_records.count()
+	location_donor_records = country_donor_records.filter(Q(location1=req_location1) | Q(location2=req_location2))
+	location_donor_records_total = location_donor_records.count()
+	matching_records = location_donor_records.filter(blood_group=req_bloodgroup)[:10]
+	matching_records_total = matching_records.count()
+
+	request_check = DonorRequest.objects.filter(bloodrequest=request_data)
+
+	if not request_check:
+	
+		instance = DonorRequest.objects.create(bloodrequest=request_data)
+		for record in matching_records:
+			send_donation_request(record.phone_number, record.full_name, req_country, req_location1, req_bloodgroup)
+			instance.user.add(record.user)
+
+
+
+	context = {
+			'req_country' : req_country,
+			'req_location' : req_location1,
+			'req_blood_group' : req_bloodgroup,
+			'country_donor_records_total' : country_donor_records_total,
+			'location_donor_records_total' : location_donor_records_total,
+			'matching_records_total' : matching_records_total,
+		}
+	
+	return render(request, 'core/myrequestdata.html', context)
