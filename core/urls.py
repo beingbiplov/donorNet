@@ -7,7 +7,7 @@ from .views import (index,
         RequestBlood,
         HandleBloodRequest,
         sendDonorRequest,
-
+        donationRequests
     )
 
 app_name = 'core'
@@ -23,6 +23,7 @@ urlpatterns = [
     path('request-blood-donation', RequestBlood.as_view(), name='request-blood-donation'),
     path('my-requests',HandleBloodRequest, name='my-requests'),
     path('send-request/<int:pk>', sendDonorRequest, name='send-request'),
+    path('donation-requests', donationRequests.as_view(), name='donation-requests'),
 
     path('searchresult', index, name='searchresult'),
     path('donorlist', index, name='donorlist'),

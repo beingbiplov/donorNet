@@ -252,3 +252,10 @@ def sendDonorRequest(request, pk):
 		}
 	
 	return render(request, 'core/myrequestdata.html', context)
+
+
+class donationRequests(ListView):
+	queryset = BloodRequest.objects.filter(is_active=True).order_by('-date_created')
+	template_name = 'core/donationrequests.html'
+	paginate_by = 9
+	context_object_name = 'donation_request'
