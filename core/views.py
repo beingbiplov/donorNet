@@ -220,6 +220,10 @@ def sendDonorRequest(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)
 	
+	if request_data.user == user:
+		current_user_request = True
+	else:
+		current_user_request = False
 
 	req_bloodgroup = request_data.blood_group
 	req_country = request_data.country
@@ -249,9 +253,11 @@ def sendDonorRequest(request, pk):
 			'req_country' : req_country,
 			'req_location' : req_location1,
 			'req_blood_group' : req_bloodgroup,
+			'req_required_on' : req_required_on,
 			'country_donor_records_total' : country_donor_records_total,
 			'location_donor_records_total' : location_donor_records_total,
 			'matching_records_total' : matching_records_total,
+			'current_user_request' : current_user_request,
 		}
 	
 	return render(request, 'core/myrequestdata.html', context)
@@ -260,5 +266,5 @@ def sendDonorRequest(request, pk):
 class donationRequests(ListView):
 	queryset = BloodRequest.objects.filter(is_active=True).order_by('-date_created')
 	template_name = 'core/donationrequests.html'
-	paginate_by = 9
+	paginate_by = 12
 	context_object_name = 'donation_request'

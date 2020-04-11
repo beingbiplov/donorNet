@@ -4,13 +4,15 @@
 
 
 {% block content %}
+
+	{% if current_user_request == True %}
 		
 		<div class="container">
 			
 			<div class="row">
 
 				
-				<div class="col-lg col-md">
+				<div class="col-lg-6 col-md-6">
 			
 
 				<div class="search_card card " style="max-width: 500px;">
@@ -48,6 +50,32 @@
 				</div> <!-- card.// -->
 
 			</div>
+
+			<div class="col-lg-6 col-md-6">
+			
+
+				<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					
+
+					<h2 class="blood_group_card"> Donors Ready t0 help </h2>
+					<br>
+
+				
+					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
+					<br><br>
+
+					<h4>Here you will see donors who want to donate and you can accept donation.</h4>
+					
+
+						
+						
+					
+					</p>
+				</article>
+				</div> <!-- card.// -->
+
+			</div>
 			
 		</div>
 		
@@ -60,7 +88,51 @@
 
 
 
+	{% else %}
 
+
+		<div class="container">
+			
+			<div class="row">
+
+				
+				<div class="col-lg col-md">
+			
+
+				<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					
+
+					<h2 class="blood_group_card"> {{ req_blood_group }} </h2>
+					<br>
+
+					<p class="user_blood_request_info">
+						Country: {{ req_country }} <br>
+						Location: {{ req_location }} 
+						<br>
+						Required On : {{ req_required_on }}
+						<br><br>
+
+						<button href="#" type="btn" class="btn-primary">Donate</button>
+						
+					
+					</p>
+				</article>
+				</div> <!-- card.// -->
+
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+
+
+
+	{% endif %}
 
 
 
