@@ -21,11 +21,11 @@
 
 					{% if bloodgroup_donor_records_total >= 1 %}
 
-						<button type="btn" class="btn-primary">Request Blood Donation</button>
+						<a href="{% url 'core:request-blood-donation' %}"><button type="btn" class="btn-primary">Request Blood Donation</button></a>
 					{%  else %}
 						<p>You can search for donors in nearby city or use a general location.</p> 
 						There are {{ country_donor_records_total }} donors registered in {{ r_country }}. <br><br>
-						<button type="btn" class="btn-primary">Search Donors</button>
+						<a href="{% url 'core:index' %}"><button type="btn" class="btn-primary">Search Donors</button> </a>
 					{% endif %}
 
 					<br> <br><br>

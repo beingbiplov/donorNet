@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import SearchDonorForm
 from .send_sms import welcome_message, send_donation_request
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	if request.method == 'POST':
@@ -187,7 +188,7 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 	model = BloodRequest
 	fields = ['blood_group', 'phone_number', 'country', 'location1', 'location2', 'required_on']
 	template_name = 'core/requestblood.html'
-	success_url = reverse_lazy('core:index')
+	success_url = reverse_lazy('core:my-requests')
 
 	def get_form(self):
 		'''add date picker in forms'''
@@ -201,7 +202,7 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 		form.instance.user = self.request.user
 		return super().form_valid(form)
 
-
+@login_required
 def HandleBloodRequest(request):
 	user = request.user
 
@@ -213,6 +214,7 @@ def HandleBloodRequest(request):
 	return render(request, 'core/userbloodrequest.html', context)
 
 
+@login_required
 def sendDonorRequest(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)

@@ -24,10 +24,20 @@
 					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
 					<br><br>
 
-					{% if matching_records_total < 15 %}
+					{% if matching_records_total <= 0 %}
+						<h4>Sorry!! We could not find any donors matching your query.</h4>
+						<h6><em> Try searching for general location. You can search for nearby cities if that is feasible. <br>
+						Some information that may help:
+						There are {{ country_donor_records_total }} donors in {{ req_country }} and {{ location_donor_records_total }} donors in {{ req_location }}
+						</em>
+						</h6>
+					{% elif matching_records_total < 15 %}
 						<h4>We have sent sms request to {{ matching_records_total }} donors that matches your query. Please wait for their response.</h4>
 					{% elif matching_records_total >= 15 %}
 						<h4>We have sent sms request to 15 donors that matches your query. Please wait for their response.</h4>
+
+						</h4>
+
 					{% endif %}
 
 						
