@@ -42,3 +42,7 @@ def send_donation_request(phone_number, full_name, req_country, req_location1, r
 		     )
 	except:
 		pass
+
+
+def send_donoraccept_request():
+	print("1 donor accept msg")

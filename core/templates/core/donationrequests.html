@@ -33,7 +33,7 @@
 						Required On : {{ request.required_on }}
 						<br><br>
 
-						<button href="#" type="btn" class="btn-primary">Donate</button>
+						<a href="{% url 'core:user-donate' request.pk %}"><button type="btn" class="btn-primary">Donate</button></a>
 						
 					
 					</p>

@@ -55,7 +55,7 @@ class Patient(models.Model):
     is_donor = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'{self.full_name} : {self.blood_group}'
+        return f'{self.full_name} '
 
 class BloodRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -78,6 +78,15 @@ class BloodRequest(models.Model):
 class DonorRequest(models.Model):
     bloodrequest = models.ForeignKey(BloodRequest, on_delete=models.CASCADE)
     user = models.ManyToManyField(User)
+
+    def __Str__(self):
+        return f'{self.bloodrequest.blood_group}'
+
+
+class DonorAccept(models.Model):
+    bloodrequest = models.ForeignKey(BloodRequest, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_accepted = models.BooleanField(default=False)
 
     def __Str__(self):
         return f'{self.bloodrequest.blood_group}'

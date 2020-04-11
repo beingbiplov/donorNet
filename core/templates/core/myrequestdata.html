@@ -12,7 +12,7 @@
 			<div class="row">
 
 				
-				<div class="col-lg-6 col-md-6">
+				<div class="col-lg-5 col-md-4">
 			
 
 				<div class="search_card card " style="max-width: 500px;">
@@ -51,15 +51,35 @@
 
 			</div>
 
-			<div class="col-lg-6 col-md-6">
+			<div class="col-lg-7 col-md-8">
 			
 
 				<div class="search_card card " style="max-width: 500px;">
 				<article class="card-body mx-auto" style="max-width: 400px;">
-					
+					{% if accepted_donors %}
 
 					<h2 class="blood_group_card"> Donors Ready t0 help </h2>
 					<br>
+					
+
+					{% for donor in accepted_donors %}
+
+						<h4>{{ donor.full_name }} </h4>
+						Country:{{ donor.country }}<br>
+						Location: {{ donor.location1 }}
+						{% if location2 %} , {{ donor.location2 }} {% endif %}<br>
+						Blood group: {{ donor.blood_group }}<br>
+						Phone: {{ donor.phone_number }}
+						<br>
+						<button type="btn" class="btn-primary">Accept request</button>
+						<hr>
+					
+					{% endfor %}
+
+					{% else %}
+					
+
+					
 
 				
 					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
@@ -71,7 +91,7 @@
 						
 						
 					
-					</p>
+				{% endif %}
 				</article>
 				</div> <!-- card.// -->
 
