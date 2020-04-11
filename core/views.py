@@ -188,7 +188,6 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 	model = BloodRequest
 	fields = ['blood_group', 'phone_number', 'country', 'location1', 'location2', 'required_on']
 	template_name = 'core/requestblood.html'
-	success_url = reverse_lazy('core:my-requests')
 
 	def get_form(self):
 		'''add date picker in forms'''
@@ -201,6 +200,8 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 	def form_valid(self, form):
 		form.instance.user = self.request.user
 		return super().form_valid(form)
+
+
 
 @login_required
 def HandleBloodRequest(request):

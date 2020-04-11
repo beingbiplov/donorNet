@@ -5,6 +5,7 @@ from users.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
 from django.core.validators import RegexValidator
 from django_countries.fields import CountryField
+from django.urls import reverse
 
 # Create your models here.
 blood_choices = [
@@ -66,6 +67,9 @@ class BloodRequest(models.Model):
     required_on = models.DateTimeField(blank=False, null=False)
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse('core:send-request',kwargs={'pk':self.pk})
     
     def __str__(self):
         return f'{self.country}-{self.location1} : {self.blood_group}'
