@@ -4,13 +4,15 @@
 
 
 {% block content %}
+
+	{% if current_user_request == True %}
 		
 		<div class="container">
 			
 			<div class="row">
 
 				
-				<div class="col-lg col-md">
+				<div class="col-lg-5 col-md-4">
 			
 
 				<div class="search_card card " style="max-width: 500px;">
@@ -24,16 +26,72 @@
 					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
 					<br><br>
 
-					{% if matching_records_total < 15 %}
+					{% if matching_records_total <= 0 %}
+						<h4>Sorry!! We could not find any donors matching your query.</h4>
+						<h6><em> Try searching for general location. You can search for nearby cities if that is feasible. <br>
+						Some information that may help:
+						There are {{ country_donor_records_total }} donors in {{ req_country }} and {{ location_donor_records_total }} donors in {{ req_location }}
+						</em>
+						</h6>
+					{% elif matching_records_total < 15 %}
 						<h4>We have sent sms request to {{ matching_records_total }} donors that matches your query. Please wait for their response.</h4>
 					{% elif matching_records_total >= 15 %}
 						<h4>We have sent sms request to 15 donors that matches your query. Please wait for their response.</h4>
+
+						</h4>
+
 					{% endif %}
 
 						
 						
 					
 					</p>
+				</article>
+				</div> <!-- card.// -->
+
+			</div>
+
+			<div class="col-lg-7 col-md-8">
+			
+
+				<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					{% if accepted_donors %}
+
+					<h2 class="blood_group_card"> Donors Ready t0 help </h2>
+					<br>
+					
+
+					{% for donor in accepted_donors %}
+
+						<h4>{{ donor.full_name }} </h4>
+						Country:{{ donor.country }}<br>
+						Location: {{ donor.location1 }}
+						{% if location2 %} , {{ donor.location2 }} {% endif %}<br>
+						Blood group: {{ donor.blood_group }}<br>
+						Phone: {{ donor.phone_number }}
+						<br>
+						<button type="btn" class="btn-primary">Accept request</button>
+						<hr>
+					
+					{% endfor %}
+
+					{% else %}
+					
+
+					
+
+				
+					<small>Query:(country: {{ req_country }}, location: {{ req_location }}, Blood group: {{ req_blood_group }}) </small>
+					<br><br>
+
+					<h4>Here you will see donors who want to donate and you can accept donation.</h4>
+					
+
+						
+						
+					
+				{% endif %}
 				</article>
 				</div> <!-- card.// -->
 
@@ -50,7 +108,51 @@
 
 
 
+	{% else %}
 
+
+		<div class="container">
+			
+			<div class="row">
+
+				
+				<div class="col-lg col-md">
+			
+
+				<div class="search_card card " style="max-width: 500px;">
+				<article class="card-body mx-auto" style="max-width: 400px;">
+					
+
+					<h2 class="blood_group_card"> {{ req_blood_group }} </h2>
+					<br>
+
+					<p class="user_blood_request_info">
+						Country: {{ req_country }} <br>
+						Location: {{ req_location }} 
+						<br>
+						Required On : {{ req_required_on }}
+						<br><br>
+
+						<button href="#" type="btn" class="btn-primary">Donate</button>
+						
+					
+					</p>
+				</article>
+				</div> <!-- card.// -->
+
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+
+
+
+	{% endif %}
 
 
 

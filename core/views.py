@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, UpdateView
 from django.db.models import Q
-from .models import Donor, Patient, BloodRequest, DonorRequest
+from .models import Donor, Patient, BloodRequest, DonorRequest, DonorAccept
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import SearchDonorForm
-from .send_sms import welcome_message, send_donation_request
+from .send_sms import welcome_message, send_donation_request,send_donaraccept_request
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	if request.method == 'POST':
@@ -187,7 +188,6 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 	model = BloodRequest
 	fields = ['blood_group', 'phone_number', 'country', 'location1', 'location2', 'required_on']
 	template_name = 'core/requestblood.html'
-	success_url = reverse_lazy('core:index')
 
 	def get_form(self):
 		'''add date picker in forms'''
@@ -202,6 +202,8 @@ class RequestBlood(LoginRequiredMixin, CreateView):
 		return super().form_valid(form)
 
 
+
+@login_required
 def HandleBloodRequest(request):
 	user = request.user
 
@@ -213,10 +215,32 @@ def HandleBloodRequest(request):
 	return render(request, 'core/userbloodrequest.html', context)
 
 
+@login_required
 def sendDonorRequest(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)
+	accepted_donors = []
+	ready_donor_data = DonorAccept.objects.filter(bloodrequest=request_data)
+	for donor in ready_donor_data:
+		donor_data = Donor.objects.get(user=donor.user)
+		accepted_donor_data = {
+			'full_name' : donor_data.full_name,
+			'country' : donor_data.country,
+			'location1' : donor_data.location1,
+			'location2' : donor_data.location2,
+			'blood_group' : donor_data.blood_group,
+			'phone_number': donor_data.phone_number,
+
+
+		}
+
+		accepted_donors.append(accepted_donor_data)
 	
+
+	if request_data.user == user:
+		current_user_request = True
+	else:
+		current_user_request = False
 
 	req_bloodgroup = request_data.blood_group
 	req_country = request_data.country
@@ -246,9 +270,12 @@ def sendDonorRequest(request, pk):
 			'req_country' : req_country,
 			'req_location' : req_location1,
 			'req_blood_group' : req_bloodgroup,
+			'req_required_on' : req_required_on,
 			'country_donor_records_total' : country_donor_records_total,
 			'location_donor_records_total' : location_donor_records_total,
 			'matching_records_total' : matching_records_total,
+			'current_user_request' : current_user_request,
+			'accepted_donors' : accepted_donors,
 		}
 	
 	return render(request, 'core/myrequestdata.html', context)
@@ -257,5 +284,22 @@ def sendDonorRequest(request, pk):
 class donationRequests(ListView):
 	queryset = BloodRequest.objects.filter(is_active=True).order_by('-date_created')
 	template_name = 'core/donationrequests.html'
-	paginate_by = 9
+	paginate_by = 12
 	context_object_name = 'donation_request'
+
+
+@login_required
+def userDonate(request, pk):
+	user = request.user
+	request_data = BloodRequest.objects.get(pk=pk)
+
+	request_check = DonorAccept.objects.filter(bloodrequest=request_data).filter(user=user)
+
+	if not request_check:
+	
+		instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
+		
+		send_donoraccept_request()
+		instance.save()
+
+	return redirect('core:send-request', pk=pk)

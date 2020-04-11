@@ -5,6 +5,7 @@ from users.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
 from django.core.validators import RegexValidator
 from django_countries.fields import CountryField
+from django.urls import reverse
 
 # Create your models here.
 blood_choices = [
@@ -54,7 +55,7 @@ class Patient(models.Model):
     is_donor = models.BooleanField(default=False)
     
     def __str__(self):
-        return f'{self.full_name} : {self.blood_group}'
+        return f'{self.full_name} '
 
 class BloodRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -66,6 +67,9 @@ class BloodRequest(models.Model):
     required_on = models.DateTimeField(blank=False, null=False)
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse('core:send-request',kwargs={'pk':self.pk})
     
     def __str__(self):
         return f'{self.country}-{self.location1} : {self.blood_group}'
@@ -74,6 +78,15 @@ class BloodRequest(models.Model):
 class DonorRequest(models.Model):
     bloodrequest = models.ForeignKey(BloodRequest, on_delete=models.CASCADE)
     user = models.ManyToManyField(User)
+
+    def __Str__(self):
+        return f'{self.bloodrequest.blood_group}'
+
+
+class DonorAccept(models.Model):
+    bloodrequest = models.ForeignKey(BloodRequest, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_accepted = models.BooleanField(default=False)
 
     def __Str__(self):
         return f'{self.bloodrequest.blood_group}'

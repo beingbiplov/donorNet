@@ -12,7 +12,7 @@
 			<div class="row">
 
 				{% for request in donation_request %}
-				<div class="col-lg col-md">
+				<div class="col-lg-4 col-md-6">
 			
 
 				<div class="search_card card " style="max-width: 500px;">
@@ -29,11 +29,11 @@
 							, {{ request.location2 }}
 						{% endif %}
 						<br>
-						Phone: {{ request.phone_number }} <br>
+						
 						Required On : {{ request.required_on }}
 						<br><br>
 
-						<button href="#" type="btn" class="btn-primary">Donate</button>
+						<a href="{% url 'core:user-donate' request.pk %}"><button type="btn" class="btn-primary">Donate</button></a>
 						
 					
 					</p>
