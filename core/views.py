@@ -268,7 +268,7 @@ def sendDonorRequest(request, pk):
 	
 		instance = DonorRequest.objects.create(bloodrequest=request_data)
 		for record in matching_records:
-			send_donation_request(record.phone_number, record.full_name, req_country, req_location1, req_bloodgroup)
+			send_donation_request(record.phone_number, record.full_name, req_country, req_location1, req_bloodgroup, pk)
 			instance.user.add(record.user)
 
 
@@ -302,15 +302,18 @@ def userDonate(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)
 
+
 	request_check = DonorAccept.objects.filter(bloodrequest=request_data).filter(user=user)
 
 	if not request_check:
 	
 		instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
 		
-		send_donoraccept_request()
+		send_donoraccept_request(request_data.phone_number,pk)
 		instance.save()
 		messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
 	else:
 		messages.info(request, f'You have already accepted the donation requst.')
 	return redirect('core:send-request', pk=pk)
+
+
