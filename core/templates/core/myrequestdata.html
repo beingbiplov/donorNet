@@ -4,6 +4,18 @@
 
 
 {% block content %}
+	
+	<div style="margin-left: 20%; margin-right: 20%; text-align: center">
+		{% if messages %}
+          {% for message in messages %}
+
+     		 <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+	</div>
+
+          {% endfor %}
+          {% endif %}
+	</div>
 
 	{% if current_user_request == True %}
 		
@@ -133,7 +145,15 @@
 						Required On : {{ req_required_on }}
 						<br><br>
 
-						<button href="#" type="btn" class="btn-primary">Donate</button>
+						{% if current_user_is_donor == True %}
+
+						<button type="btn" class="btn-primary disabled">You are willing to donate.</button>
+
+						{% else %}
+						<a href="{% url 'core:user-donate' bloodrequest_pk %}"><button type="btn" class="btn-primary">Donate</button></a>
+
+						{% endif %}
+
 						
 					
 					</p>
