@@ -24,12 +24,13 @@ def welcome_message(send_to, r_name):
 		pass
 
 
-def send_donation_request(phone_number, full_name, req_country, req_location1, req_bloodgroup):
+def send_donation_request(phone_number, full_name, req_country, req_location1, req_bloodgroup, br_pk):
 	account_sid = settings.TWILIO_ACCOUNT_SID
 	auth_token = settings.TWILIO_AUTH_TOKEN
 	if phone_number[0] != '+':
 		phone_number = '+'+phone_number
-	message = f'Hello {{ full_name }}!! . Someone at {{ req_location1 }}, {{ req_country}} need {{ req_bloodgroup }} blood urgently. Please contact ASAP if you can donate blood. Donate blood, Save life.'
+	br_link = f'localhost:8000/send-request/{ br_pk }'
+	message = f'Hello { full_name }!! . Someone at { req_location1 }, { req_country} need { req_bloodgroup } blood urgently. Please vist { br_link } if you can donate blood. Donate blood, Save life.'
 	
 	try:
 		client = Client(account_sid, auth_token)
@@ -44,5 +45,22 @@ def send_donation_request(phone_number, full_name, req_country, req_location1, r
 		pass
 
 
-def send_donoraccept_request():
-	print("1 donor accept msg")
+def send_donoraccept_request(phone_number, br_pk):
+	account_sid = settings.TWILIO_ACCOUNT_SID
+	auth_token = settings.TWILIO_AUTH_TOKEN
+	if phone_number[0] != '+':
+		phone_number = '+'+phone_number
+	br_link = f'localhost:8000/send-request/{ br_pk }'
+	message = f'Hello. One person accepted your blood donation request. Please vist { br_link } to view contact information. Donate blood, Save life.'
+	print(message)
+	try:
+		client = Client(account_sid, auth_token)
+
+		message = client.messages \
+		    .create(
+		         body=message,
+		         from_=settings.TWILIO_NUMBER,
+		         to=phone_number
+		     )
+	except:
+		pass

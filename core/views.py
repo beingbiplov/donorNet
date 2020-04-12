@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import SearchDonorForm
-from .send_sms import welcome_message, send_donation_request,send_donaraccept_request
+from .send_sms import welcome_message, send_donation_request,send_donoraccept_request
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -242,6 +242,13 @@ def sendDonorRequest(request, pk):
 	else:
 		current_user_request = False
 
+	current_user_is_donor_check = DonorAccept.objects.filter(user=request.user)
+	if not current_user_is_donor_check:
+		current_user_is_donor = False
+	else:
+		current_user_is_donor = True
+
+
 	req_bloodgroup = request_data.blood_group
 	req_country = request_data.country
 	req_location1 = request_data.location1
@@ -261,7 +268,7 @@ def sendDonorRequest(request, pk):
 	
 		instance = DonorRequest.objects.create(bloodrequest=request_data)
 		for record in matching_records:
-			send_donation_request(record.phone_number, record.full_name, req_country, req_location1, req_bloodgroup)
+			send_donation_request(record.phone_number, record.full_name, req_country, req_location1, req_bloodgroup, pk)
 			instance.user.add(record.user)
 
 
@@ -276,6 +283,8 @@ def sendDonorRequest(request, pk):
 			'matching_records_total' : matching_records_total,
 			'current_user_request' : current_user_request,
 			'accepted_donors' : accepted_donors,
+			'bloodrequest_pk' : pk,
+			'current_user_is_donor' : current_user_is_donor,
 		}
 	
 	return render(request, 'core/myrequestdata.html', context)
@@ -293,13 +302,18 @@ def userDonate(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)
 
+
 	request_check = DonorAccept.objects.filter(bloodrequest=request_data).filter(user=user)
 
 	if not request_check:
 	
 		instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
 		
-		send_donoraccept_request()
+		send_donoraccept_request(request_data.phone_number,pk)
 		instance.save()
-
+		messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
+	else:
+		messages.info(request, f'You have already accepted the donation requst.')
 	return redirect('core:send-request', pk=pk)
+
+
