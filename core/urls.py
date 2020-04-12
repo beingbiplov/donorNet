@@ -27,14 +27,5 @@ urlpatterns = [
     path('donation-requests', donationRequests.as_view(), name='donation-requests'),
     path('user-donate/<int:pk>', userDonate, name='user-donate'),
 
-    path('searchresult', index, name='searchresult'),
-    path('donorlist', index, name='donorlist'),
- #   path('add-record', views.addrecord, name='addrecord'),
-    path('contact', index, name='contact'),
-    path('donor-confirmation', index, name='donorconf'),
-    path('pending-donors', index, name='pendingdonors'),
-    path('donor/<int:pk>/update', index, name='donor-update'),
-    path('blood-register', index, name='bloodregister'),
-    path('search-blood', index, name='searchblood'),
-    path('search-donor',index, name='searchdonor'),
+
 ]

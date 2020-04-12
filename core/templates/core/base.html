@@ -33,27 +33,30 @@
                 <a class="nav-link" href="{% url 'core:index' %}">Home <span class="sr-only">Home</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}"><p>Donate</p></a>
+                <a class="nav-link" href="{% url 'core:index' %}#search">Search Donors</a>
+                
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Search Blood</a>
+
+                <a class="nav-link" href="{% url 'core:donation-requests' %}">Blood Requests</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Search Donors</a>
+                <a class="nav-link" href="{% url 'core:request-blood-donation' %}"><p>Request Blood</p></a>
             </li>
             
         </ul>
 
-        <ul class="nav navbar-nav ml-auto">
+        <ul class="navbar-nav ">
           {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Register Blood</a>
-            </li>
-            <li>
-               <a class="nav-link" href="{% url 'register' %}">Verify Donors</a>
-            </li>
+            
+           
           {% else %}
-            <li><a href="admin/login/?next=/"><button class="btn-primary" style="cursor:pointer;"> Log In</button> </a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}"><p>Log In</p></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}"><p>Register</p></a>
+            </li>
           {% endif %}
 
     </ul>
