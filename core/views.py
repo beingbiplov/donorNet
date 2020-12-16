@@ -294,7 +294,7 @@ class donationRequests(ListView):
 	queryset = BloodRequest.objects.filter(is_active=True).order_by('-date_created')
 	template_name = 'core/donationrequests.html'
 	paginate_by = 12
-	context_object_name = 'donation_request'
+	context_object_name = 'donation_requests'
 
 
 @login_required
@@ -302,18 +302,25 @@ def userDonate(request, pk):
 	user = request.user
 	request_data = BloodRequest.objects.get(pk=pk)
 
-
+	check_if_donor = Donor.objects.filter(user = user)
 	request_check = DonorAccept.objects.filter(bloodrequest=request_data).filter(user=user)
 
-	if not request_check:
-	
-		instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
-		
-		send_donoraccept_request(request_data.phone_number,pk)
-		instance.save()
-		messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
+	if check_if_donor or request_data.user == user:
+		if request_data.user == user:
+			return redirect('core:send-request', pk=pk)
+		else:
+			if not request_check:
+			
+				instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
+				
+				send_donoraccept_request(request_data.phone_number,pk)
+				instance.save()
+				messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
+			else:
+				messages.info(request, f'You have already accepted the donation requst.')
+			return redirect('core:send-request', pk=pk)
 	else:
-		messages.info(request, f'You have already accepted the donation requst.')
-	return redirect('core:send-request', pk=pk)
+		messages.info(request, f'You are logged in as patient. Please login or register as donor to donate.')
+		return redirect('core:donation-requests')
 
 

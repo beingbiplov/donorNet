@@ -6,12 +6,23 @@
 {% block content %}
 		
 		<h4 class="card-title mt-2 text-center">Blood Donation Request</h4>
+
+	<div style="margin-left: 20%; margin-right: 20%; text-align: center">
+		{% if messages %}
+       		{% for message in messages %}
+
+     			<div class="alert alert-{{ message.tags }}">
+         			{{ message }}
+				</div>
+
+         	{% endfor %}
+        {% endif %}
+	</div>
 		
 		<div class="container">
-			{% if donation_request %}
+			{% if donation_requests %}
 			<div class="row">
-
-				{% for request in donation_request %}
+				{% for donation_request in donation_requests %}
 				<div class="col-lg-4 col-md-6">
 			
 
@@ -19,21 +30,24 @@
 				<article class="card-body mx-auto" style="max-width: 400px;">
 					
 
-					<h2 class="blood_group_card"> {{ request.blood_group }} </h2>
+					<h2 class="blood_group_card"> {{ donation_request.blood_group }} </h2>
 					<br>
 
 					<p class="user_blood_request_info">
-						Country: {{ request.country }} <br>
-						Location: {{ request.location1 }} 
-						{% if request.location2 %}
-							, {{ request.location2 }}
+						Country: {{ donation_request.country }} <br>
+						Location: {{ donation_request.location1 }} 
+						{% if donation_request.location2 %}
+							, {{ donation_request.location2 }}
 						{% endif %}
 						<br>
 						
-						Required On : {{ request.required_on }}
+						Required On : {{ donation_request.required_on }}
 						<br><br>
-
-						<a href="{% url 'core:user-donate' request.pk %}"><button type="btn" class="btn-primary">Donate</button></a>
+						{% if donation_request.user.email == request.user.email  %}
+							<a href="{% url 'core:user-donate' donation_request.pk %}"><button type="btn" class="btn-primary">View</button></a>
+						{% else %}
+							<a href="{% url 'core:user-donate' donation_request.pk %}"><button type="btn" class="btn-primary">Donate</button></a>
+						{% endif %}
 						
 					
 					</p>

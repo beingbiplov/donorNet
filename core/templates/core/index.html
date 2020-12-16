@@ -26,37 +26,37 @@
 
 
  		<div class="container-fluid bg-white ">
-	<div id="search" class="row align-items-center justify-content-center">
+        	<div id="search" class="row align-items-center justify-content-center">
 
-                        <div class="col-lg-6 pt-3">
-                        	<h2 class="search_h mb-3">Search Donors</h2> 	
-                        <p class="search_donor_info">	
-                        You can search for donors near you and request for donation. Select the country , bloodgroup and enter the city name.  
-            	          
-            	      </p>
+                <div class="col-lg-6 pt-3">
+                	<h2 class="search_h mb-3">Search Donors</h2> 	
+                <p class="search_donor_info">	
+                You can search for donors near you and request for donation. Select the country , bloodgroup and enter the city name.  
+    	          
+    	      </p>
 
-            	        </div>
+    	        </div>
 
-            	        <div class="col-lg-6 pt-3">
-                        	
-                            <form method="POST">
-                            {% csrf_token %}
-                            <p class="donor_search_form_fields">
-                             {{ form.country }}
-                             
-                             {{ form.blood_group}}
-                             {{ form.location }}
-                             </p>
-            	          <button type="submit" class="searchbtn btn btn-primary btn-block" style="width: 60%">Search</button>
-                          </form>
-            	      </p>
+    	        <div class="col-lg-6 pt-3">
+                	
+                    <form method="POST">
+                    {% csrf_token %}
+                    <p class="donor_search_form_fields">
+                     {{ form.country }}
+                     
+                     {{ form.blood_group}}
+                     {{ form.location }}
+                     </p>
+    	          <button type="submit" class="searchbtn btn btn-primary btn-block" style="width: 60%">Search</button>
+                  </form>
+    	      </p>
 
-            	        </div>
-            	       
-            	           
-            	        
-                	</div>
-</div>
+    	        </div>
+    	       
+    	           
+    	        
+        	</div>
+        </div>
 
 
 
