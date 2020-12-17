@@ -304,21 +304,26 @@ def userDonate(request, pk):
 
 	check_if_donor = Donor.objects.filter(user = user)
 	request_check = DonorAccept.objects.filter(bloodrequest=request_data).filter(user=user)
-
+	
 	if check_if_donor or request_data.user == user:
 		if request_data.user == user:
 			return redirect('core:send-request', pk=pk)
 		else:
-			if not request_check:
-			
-				instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
+			print(request_data.blood_group , check_if_donor[0].blood_group)
+			if (request_data.blood_group == check_if_donor[0].blood_group):
+				if not request_check:
 				
-				send_donoraccept_request(request_data.phone_number,pk)
-				instance.save()
-				messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
+					instance = DonorAccept.objects.create(bloodrequest=request_data, user=user)
+					
+					send_donoraccept_request(request_data.phone_number,pk)
+					instance.save()
+					messages.info(request, f'You have accepted the donation request. We will provide your contact information to the person who requested the blood.')
+				else:
+					messages.info(request, f'You have already accepted the donation requst.')
+				return redirect('core:send-request', pk=pk)
 			else:
-				messages.info(request, f'You have already accepted the donation requst.')
-			return redirect('core:send-request', pk=pk)
+				messages.info(request, f'You cannot donate to this blood group.')
+				return redirect('core:donation-requests')
 	else:
 		messages.info(request, f'You are logged in as patient. Please login or register as donor to donate.')
 		return redirect('core:donation-requests')
