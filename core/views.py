@@ -45,18 +45,18 @@ class addDonnorInfo(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 	
 
 	model = Donor
-	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'country', 'location1', 'location2','last_donated']
+	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'country', 'location1', 'location2','verification_document']
 	template_name = 'core/createdonorprofile.html'
 	success_url = reverse_lazy('core:index')
 
 
-	def get_form(self):
-		'''add date picker in forms'''
-		from django.forms.widgets import SelectDateWidget
-		form = super(addDonnorInfo, self).get_form()
-		form.fields['last_donated'].widget = SelectDateWidget(years=range(2019, 2021))
+	# def get_form(self):
+	# 	'''add date picker in forms'''
+	# 	from django.forms.widgets import SelectDateWidget
+	# 	form = super(addDonnorInfo, self).get_form()
+	# 	form.fields['last_donated'].widget = SelectDateWidget(years=range(2019, 2021))
 		
-		return form
+	# 	return form
 		
 	def form_valid(self, form):
 		form.instance.user = self.request.user
@@ -92,7 +92,7 @@ class addDonnorInfo(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class updateDonnorInfo(LoginRequiredMixin, UpdateView):
 	model = Donor
-	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'country', 'location1', 'location2', 'can_donate','last_donated']
+	fields = ['full_name','age', 'gender', 'phone_number', 'blood_group', 'country', 'location1', 'location2', 'can_donate','verification_document']
 	template_name = 'core/updatedonorinfo.html'
 	success_url = reverse_lazy('core:index')
 

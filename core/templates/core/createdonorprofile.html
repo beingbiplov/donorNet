@@ -23,7 +23,7 @@
 				        <span class="bg-light">OR</span>
 				    </p>
 
-				    <form method="post">
+				    <form method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						{{ form|crispy }}
 						<div class="form-group">

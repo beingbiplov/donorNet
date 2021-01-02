@@ -34,8 +34,10 @@ class Donor(models.Model):
     location1 = models.CharField( max_length=50)
     location2 = models.CharField( max_length=50, null=True, blank=True)
     country = CountryField(blank_label='(select country)')
-    blood_group = models.CharField(max_length=10, choices=blood_choices)    
-    last_donated = models.DateField(null=True, blank=True)
+    blood_group = models.CharField(max_length=10, choices=blood_choices)  
+    verification_document = models.ImageField(upload_to='verification_document', null=False, blank=False, help_text='Upload image of document to verify your blood group.(eg. license, Donation card etc.')
+    is_verified = models.BooleanField(default=False)
+    # last_donated = models.DateField(null=True, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
 
     can_donate = models.BooleanField(default=True)
